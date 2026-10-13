@@ -1,0 +1,23 @@
+# Cloudflare Pages response headers for calvinchen.ai
+# Security: lock the site to its own files, block framing, sniffing and device APIs.
+# Only outside source allowed: Cloudflare Web Analytics (cookieless). To drop analytics, turn it off
+# in Cloudflare (Workers & Pages > calvinchen > Metrics), then remove both cloudflareinsights entries.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+# Long cache for fonts, media and versioned assets; HTML always revalidates
+/assets/*
+  Cache-Control: public, max-age=604800
+/media/*
+  Cache-Control: public, max-age=2592000
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/
+  Cache-Control: public, max-age=0, must-revalidate
